@@ -281,6 +281,8 @@ class WebServer {
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
+            System.out.println(result1);
+            System.out.println(result2);
             builder.append("X1 is: ").append(result1);
             builder.append("X2 is: ").append(result2);
           } catch (NumberFormatException exception) {
