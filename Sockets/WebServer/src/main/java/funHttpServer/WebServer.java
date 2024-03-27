@@ -244,21 +244,21 @@ class WebServer {
           JSONObject repo;
           JSONObject owner;
           builder.append("===================================");
-          builder.append("\n");
+          builder.append("<br>");
           for (int i = 0; i < repoArray.length(); i++) {
             repo = repoArray.getJSONObject(i);
             owner = repo.getJSONObject("owner");
-
+            builder.append("<p>");
             builder.append(repo.getString("full_name"));
-            builder.append("\n");
+            builder.append("<br>");
             builder.append(repo.getInt("id"));
-            builder.append("\n");
+            builder.append("<br>");
             builder.append(owner.getString("login"));
-            builder.append("\n");
+            builder.append("<br>");
             builder.append("===================================");
-            builder.append("\n");
+            builder.append("<br>");
           }
-
+          builder.append("</p>");
         } else {
           // if the request is not recognized at all
 
