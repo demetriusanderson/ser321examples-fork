@@ -233,7 +233,6 @@ class WebServer {
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
           System.out.println(json);
 
-
           try {
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
@@ -264,6 +263,56 @@ class WebServer {
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("Bad query\n");
           }
+        } else if (request.contains("quadratic?")) {
+          Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+          // extract path parameters
+          query_pairs = splitQuery(request.replace("quadratic?", ""));
+
+          // extract required fields from parameters
+          try {
+            Integer a = Integer.parseInt(query_pairs.get("a"));
+            Integer b = Integer.parseInt(query_pairs.get("b"));
+            Integer c = Integer.parseInt(query_pairs.get("c"));
+
+            double result1 = (-b + Math.sqrt((b*b) - (4*a*c))) / (2*a);
+            double result2 = (-b - Math.sqrt((b*b) - (4*a*c))) / (2*a);
+
+            // Generate response
+            builder.append("HTTP/1.1 200 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("X1 is: ").append(result1);
+            builder.append("X2 is: ").append(result2);
+          } catch (NumberFormatException exception) {
+            builder.append("HTTP/1.1 400 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
+            builder.append("Query must use numbers!\n");
+          }
+        } else if (request.contains("pythagoras?")) {
+            Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+            // extract path parameters
+            query_pairs = splitQuery(request.replace("pythagoras?", ""));
+
+            // extract required fields from parameters
+            try {
+              Integer a = Integer.parseInt(query_pairs.get("a"));
+              Integer b = Integer.parseInt(query_pairs.get("b"));
+
+              // do math
+              double result = Math.sqrt((a*a) + (b*b));
+
+              // Generate response
+              builder.append("HTTP/1.1 200 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Result is: ").append(result);
+            } catch (NumberFormatException exception) {
+              builder.append("HTTP/1.1 400 OK\n");
+              builder.append("Content-Type: text/html; charset=utf-8\n");
+              builder.append("\n");
+              builder.append("Query must use numbers!\n");
+            }
         } else {
           // if the request is not recognized at all
 
