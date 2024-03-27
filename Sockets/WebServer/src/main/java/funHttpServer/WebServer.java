@@ -233,31 +233,37 @@ class WebServer {
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
           System.out.println(json);
 
-          builder.append("HTTP/1.1 200 OK\n");
-          builder.append("Content-Type: text/html; charset=utf-8\n");
-          builder.append("\n");
 
+          try {
+            builder.append("HTTP/1.1 200 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("\n");
 
-          // TODO: Parse the JSON returned by your fetch and create an appropriate
-          // response based on what the assignment document asks for
-          JSONArray repoArray = new JSONArray(json);
-          JSONObject repo;
-          JSONObject owner;
-          builder.append("===================================");
-          for (int i = 0; i < repoArray.length(); i++) {
-            repo = repoArray.getJSONObject(i);
-            owner = repo.getJSONObject("owner");
-            builder.append("<p>");
-            builder.append("full_name: " + repo.getString("full_name"));
-            builder.append("<br>");
-            builder.append("id: " + repo.getInt("id"));
-            builder.append("<br>");
-            builder.append("login: " + owner.getString("login"));
-            builder.append("<br>");
+            // TODO: Parse the JSON returned by your fetch and create an appropriate
+            // response based on what the assignment document asks for
+            JSONArray repoArray = new JSONArray(json);
+            JSONObject repo;
+            JSONObject owner;
             builder.append("===================================");
-            builder.append("<br>");
+            for (int i = 0; i < repoArray.length(); i++) {
+              repo = repoArray.getJSONObject(i);
+              owner = repo.getJSONObject("owner");
+              builder.append("<p>");
+              builder.append("full_name: " + repo.getString("full_name"));
+              builder.append("<br>");
+              builder.append("id: " + repo.getInt("id"));
+              builder.append("<br>");
+              builder.append("login: " + owner.getString("login"));
+              builder.append("<br>");
+              builder.append("===================================");
+              builder.append("<br>");
+            }
+            builder.append("</p>");
+          } catch (org.json.JSONException) {
+            builder.append("HTTP/1.1 400 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("Bad query\n");
           }
-          builder.append("</p>");
         } else {
           // if the request is not recognized at all
 
