@@ -274,18 +274,26 @@ class WebServer {
             Integer b = Integer.parseInt(query_pairs.get("b"));
             Integer c = Integer.parseInt(query_pairs.get("c"));
 
-            double sqrt = Math.sqrt((b * b) - (4 * a * c));
-            double result1 = ((b*-1) + sqrt) / (2*a);
-            double result2 = ((b*-1) - sqrt) / (2*a);
-
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
-            System.out.println(result1);
-            System.out.println(result2);
-            builder.append("X1 is: ").append(result1);
-            builder.append("X2 is: ").append(result2);
+
+            double d = (b * b) - (4 * a * c);
+            double result1;
+            double result2;
+            if (d < 0) {
+              builder.append("X1 is: ").append((-1 * b) / (2*a)).append("+i").append(Math.sqrt(d*-1));
+              builder.append("<br>");
+              builder.append("X2 is: ").append((-1 * b) / (2*a)).append("ii").append(Math.sqrt(d*-1));
+            } else {
+              double sqrt = Math.sqrt(d);
+              result1 = ((b*-1) + sqrt) / (2*a);
+              result2 = ((b*-1) - sqrt) / (2*a);
+              builder.append("X1 is: ").append(result1);
+              builder.append("<br>");
+              builder.append("X2 is: ").append(result2);
+            }
           } catch (NumberFormatException exception) {
             builder.append("HTTP/1.1 400 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
