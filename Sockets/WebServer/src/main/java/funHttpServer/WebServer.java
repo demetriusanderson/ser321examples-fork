@@ -274,8 +274,8 @@ class WebServer {
             Integer b = Integer.parseInt(query_pairs.get("b"));
             Integer c = Integer.parseInt(query_pairs.get("c"));
 
-            double result1 = (-b + Math.sqrt((b*b) - (4*a*c))) / (2*a);
-            double result2 = (-b - Math.sqrt((b*b) - (4*a*c))) / (2*a);
+            double result1 = ((b*-1) + Math.sqrt((b*b) - (4*a*c))) / (2*a);
+            double result2 = ((b*-1) - Math.sqrt((b*b) - (4*a*c))) / (2*a);
 
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
