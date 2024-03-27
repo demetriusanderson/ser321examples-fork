@@ -249,7 +249,7 @@ class WebServer {
             owner = repo.getJSONObject("owner");
 
             builder.append(repo.getString("full_name") + "\n");
-            builder.append(repo.getString("id") + "\n");
+            builder.append(repo.getInt("id") + "\n");
             builder.append(owner.getString("login") + "\n");
             builder.append("===================================");
           }
