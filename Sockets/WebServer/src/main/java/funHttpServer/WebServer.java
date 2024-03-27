@@ -270,9 +270,9 @@ class WebServer {
 
           // extract required fields from parameters
           try {
-            Integer a = Integer.parseInt(query_pairs.get("a"));
-            Integer b = Integer.parseInt(query_pairs.get("b"));
-            Integer c = Integer.parseInt(query_pairs.get("c"));
+            double a = Double.parseDouble(query_pairs.get("a"));
+            double b = Double.parseDouble(query_pairs.get("b"));
+            double c = Double.parseDouble(query_pairs.get("c"));
 
             // Generate response
             builder.append("HTTP/1.1 200 OK\n");
