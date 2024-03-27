@@ -243,15 +243,20 @@ class WebServer {
           JSONArray repoArray = new JSONArray(json);
           JSONObject repo;
           JSONObject owner;
-          builder.append("===================================\n");
+          builder.append("===================================");
+          builder.append("\n");
           for (int i = 0; i < repoArray.length(); i++) {
             repo = repoArray.getJSONObject(i);
             owner = repo.getJSONObject("owner");
 
-            builder.append(repo.getString("full_name") + "\n");
-            builder.append(repo.getInt("id") + "\n");
-            builder.append(owner.getString("login") + "\n");
-            builder.append("===================================\n");
+            builder.append(repo.getString("full_name"));
+            builder.append("\n");
+            builder.append(repo.getInt("id"));
+            builder.append("\n");
+            builder.append(owner.getString("login"));
+            builder.append("\n");
+            builder.append("===================================");
+            builder.append("\n");
           }
 
         } else {
