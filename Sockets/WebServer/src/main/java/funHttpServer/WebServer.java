@@ -212,7 +212,7 @@ class WebServer {
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
             builder.append("Result is: " + result);
-          } catch (NumberFormatException exception) {
+          } catch (Exception exception) {
             builder.append("HTTP/1.1 400 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
@@ -258,7 +258,7 @@ class WebServer {
               builder.append("<br>");
             }
             builder.append("</p>");
-          } catch (org.json.JSONException jsonException) {
+          } catch (Exception exception) {
             builder.append("HTTP/1.1 400 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("Bad query\n");
@@ -294,11 +294,11 @@ class WebServer {
               builder.append("<br>");
               builder.append("X2 is: ").append(result2);
             }
-          } catch (NumberFormatException exception) {
+          } catch (Exception exception) {
             builder.append("HTTP/1.1 400 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("\n");
-            builder.append("Query must use numbers!\n");
+            builder.append("Bad Query!\n");
           }
         } else if (request.contains("pythagoras?")) {
             Map<String, String> query_pairs = new LinkedHashMap<String, String>();
@@ -318,11 +318,11 @@ class WebServer {
               builder.append("Content-Type: text/html; charset=utf-8\n");
               builder.append("\n");
               builder.append("Result is: ").append(result);
-            } catch (NumberFormatException exception) {
+            } catch (Exception exception) {
               builder.append("HTTP/1.1 400 OK\n");
               builder.append("Content-Type: text/html; charset=utf-8\n");
               builder.append("\n");
-              builder.append("Query must use numbers!\n");
+              builder.append("Bad Query!\n");
             }
         } else {
           // if the request is not recognized at all
