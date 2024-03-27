@@ -259,7 +259,7 @@ class WebServer {
               builder.append("<br>");
             }
             builder.append("</p>");
-          } catch (org.json.JSONException) {
+          } catch (org.json.JSONException jsonException) {
             builder.append("HTTP/1.1 400 OK\n");
             builder.append("Content-Type: text/html; charset=utf-8\n");
             builder.append("Bad query\n");
