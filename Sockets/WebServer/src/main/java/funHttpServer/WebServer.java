@@ -283,9 +283,9 @@ class WebServer {
             double result1;
             double result2;
             if (d < 0) {
-              builder.append("X1 is: ").append((-1 * b) / (2*a)).append("+i").append(Math.sqrt(d*-1));
+              builder.append("X1 is: ").append((-1 * b) / (2*a)).append("+i").append(Math.sqrt(d*-1)/(2*a));
               builder.append("<br>");
-              builder.append("X2 is: ").append((-1 * b) / (2*a)).append("ii").append(Math.sqrt(d*-1));
+              builder.append("X2 is: ").append((-1 * b) / (2*a)).append("-i").append(Math.sqrt(d*-1)/(2*a));
             } else {
               double sqrt = Math.sqrt(d);
               result1 = ((b*-1) + sqrt) / (2*a);
