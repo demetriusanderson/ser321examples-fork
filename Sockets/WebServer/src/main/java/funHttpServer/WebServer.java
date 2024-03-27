@@ -18,13 +18,11 @@ package funHttpServer;
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Map;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.nio.charset.Charset;
+
+// for JSON
+import org.json.*;
 
 class WebServer {
   public static void main(String args[]) {
@@ -238,9 +236,21 @@ class WebServer {
           builder.append("HTTP/1.1 200 OK\n");
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
-          builder.append("Check the todos mentioned in the Java source file");
+
+
           // TODO: Parse the JSON returned by your fetch and create an appropriate
           // response based on what the assignment document asks for
+          JSONArray jsonObject = new JSONArray(json);
+          JSONObject repo;
+          builder.append("===================================");
+          for (int i = 0; i < jsonObject.length(); i++) {
+            repo = new JSONObject(jsonObject.getJSONObject(i));
+
+            builder.append(repo.getString("full_name") + "\n");
+            builder.append(repo.getString("id") + "\n");
+            builder.append(repo.getString("owner.login") + "\n");
+            builder.append("===================================");
+          }
 
         } else {
           // if the request is not recognized at all
