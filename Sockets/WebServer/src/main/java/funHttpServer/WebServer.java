@@ -230,8 +230,14 @@ class WebServer {
 
           Map<String, String> query_pairs = new LinkedHashMap<String, String>();
           query_pairs = splitQuery(request.replace("github?", ""));
-          String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
-          System.out.println(json);
+          String json = null;
+          try {
+            json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
+          } catch (Exception exception) {
+            builder.append("HTTP/1.1 400 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("Bad query\n");
+          }
 
           try {
             builder.append("HTTP/1.1 200 OK\n");
@@ -266,7 +272,14 @@ class WebServer {
         } else if (request.contains("quadratic?")) {
           Map<String, String> query_pairs = new LinkedHashMap<String, String>();
           // extract path parameters
-          query_pairs = splitQuery(request.replace("quadratic?", ""));
+          try {
+            query_pairs = splitQuery(request.replace("quadratic?", ""));
+          } catch (Exception exception) {
+            builder.append("HTTP/1.1 400 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("Bad query\n");
+          }
+
 
           // extract required fields from parameters
           try {
@@ -303,7 +316,13 @@ class WebServer {
         } else if (request.contains("pythagoras?")) {
             Map<String, String> query_pairs = new LinkedHashMap<String, String>();
             // extract path parameters
+          try {
             query_pairs = splitQuery(request.replace("pythagoras?", ""));
+          } catch (Exception exception) {
+            builder.append("HTTP/1.1 400 OK\n");
+            builder.append("Content-Type: text/html; charset=utf-8\n");
+            builder.append("Bad query\n");
+          }
 
             // extract required fields from parameters
             try {
